@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AdminLoginController;
+use App\Http\Controllers\Admin\AdminRegisterController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,4 +31,28 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
+
+/*
+|--------------------------------------------------------------------------
+| 管理者用ルーティング
+|--------------------------------------------------------------------------
+*/
+Route::prefix('admin')->name('admin.')->group(function () {
+    // 登録
+    Route::get('/register', [AdminRegisterController::class, 'create']);
+    Route::post('/register', [AdminRegisterController::class, 'store'])
+        ->name('register');
+
+    // ログイン
+    Route::get('/login', [AdminLoginController::class, 'showLoginPage']);
+    Route::post('/login', [AdminLoginController::class, 'login'])->name('login');
+
+    // 以下の中は認証必須のエンドポイントとなる
+    Route::middleware(['auth:admin'])->group(function () {
+        // ダッシュボード
+        Route::get('/dashboard', function () {
+            return view('admin.dashboard');
+        })->name('dashboard');
+    });
+});

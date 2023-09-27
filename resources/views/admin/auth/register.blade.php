@@ -1,6 +1,6 @@
 <x-guest-layout>
-  <h1>User登録</h1>
-  <form method="POST" action="{{ route('register') }}">
+  <h1>Admin登録</h1>
+  <form method="POST" action="{{ route('admin.register') }}">
     @csrf
 
     <!-- Name -->

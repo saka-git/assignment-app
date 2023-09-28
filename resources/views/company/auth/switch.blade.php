@@ -35,7 +35,7 @@
       @endif
 
       @if (session('success'))
-        <div class="bg-gray-500 text-white p-4 rounded-md mb-2 mt-4">
+        <div class="bg-cyan-400 text-white p-4 rounded-md mb-2 mt-4">
           {{ session('success') }}
         </div>
       @endif

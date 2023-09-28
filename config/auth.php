@@ -46,6 +46,12 @@ return [
             'driver' => 'session',
             'provider' => 'admins',
         ],
+
+        // Company guard追加
+        'company' => [
+            'driver' => 'session',
+            'provider' => 'companies',
+        ],
     ],
 
     /*
@@ -80,6 +86,12 @@ return [
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
+        ],
+
+        // Admin provider追加
+        'companies' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Company::class,
         ],
     ],
 

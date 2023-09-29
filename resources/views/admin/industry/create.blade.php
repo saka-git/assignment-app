@@ -12,9 +12,9 @@
 
         <input type="text" name="name" id="name" value="{{ old('name') }}" placeholder="業界名" class="w-full">
 
-        <button type="submit">登録</button>
+        <button class="text-blue-500" type="submit">登録</button>
 
-        <a href="{{ route('admin.industry.index') }}">戻る</a>
+        <a class="text-red-500" href="{{ route('admin.industry.index') }}">戻る</a>
     </div>
     </form>
   </div>

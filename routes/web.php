@@ -9,7 +9,7 @@ use App\Http\Controllers\Company\CompanyRegisterController;
 use App\Http\Controllers\Company\CompanySwitchController;
 use App\Http\Controllers\Admin\IndustryController;
 use App\Http\Controllers\Company\CompanyIndustryController;
-
+use App\Http\Controllers\Admin\FeatureController;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,5 +95,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
             return view('admin.dashboard');
         })->name('dashboard');
         Route::resource('/industry', IndustryController::class)->except(['show']);
+        Route::resource('/feature', FeatureController::class)->except(['show']);
     });
 });

@@ -14,9 +14,9 @@
         <input type="text" name="name" id="name" value="{{ old('name', $industry->name) }}" placeholder="業界名"
           class="w-full">
 
-        <button type="submit">更新</button>
+        <button class="text-blue-500" type="submit">更新</button>
 
-        <a href="{{ route('admin.industry.index') }}">戻る</a>
+        <a class="text-red-500" href="{{ route('admin.industry.index') }}">戻る</a>
     </div>
   </div>
 @endsection

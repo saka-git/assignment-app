@@ -22,7 +22,7 @@
           </x-nav-link>
         </div>
         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-          <x-nav-link :href="route('admin.industry.index')">
+          <x-nav-link :href="route('admin.feature.index')">
             特徴
           </x-nav-link>
         </div>

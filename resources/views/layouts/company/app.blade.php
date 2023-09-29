@@ -30,8 +30,14 @@
     </header>
 
     <!-- Page Content -->
-    <main>
-      @yield('content')
+    <main class="grid grid-cols-2">
+      <div class="col-span-1">
+        @include('layouts.company.sidebar')
+      </div>
+
+      <div class="col-span-3">
+        @yield('content')
+      </div>
     </main>
   </div>
 </body>

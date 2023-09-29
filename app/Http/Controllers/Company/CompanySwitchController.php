@@ -49,9 +49,9 @@ class CompanySwitchController extends Controller
             foreach ($currentCompany->linkedCompanies as $linkedCompany) {
                 if (!$linkedCompany->linkedCompanies->contains($company->id)) {
                     $linkedCompany->linkedCompanies()->attach($company->id);
-                    if (!$company->linkedCompanies->contains($linkedCompany->id)) {
-                        $company->linkedCompanies()->attach($linkedCompany->id);
-                    }
+                }
+                if (!$company->linkedCompanies->contains($linkedCompany->id)) {
+                    $company->linkedCompanies()->attach($linkedCompany->id);
                 }
             }
 
@@ -59,9 +59,9 @@ class CompanySwitchController extends Controller
             foreach ($company->linkedCompanies as $linkedCompany) {
                 if (!$linkedCompany->linkedCompanies->contains($currentCompany->id)) {
                     $linkedCompany->linkedCompanies()->attach($currentCompany->id);
-                    if (!$currentCompany->linkedCompanies->contains($linkedCompany->id)) {
-                        $currentCompany->linkedCompanies()->attach($linkedCompany->id);
-                    }
+                }
+                if (!$currentCompany->linkedCompanies->contains($linkedCompany->id)) {
+                    $currentCompany->linkedCompanies()->attach($linkedCompany->id);
                 }
             }
 

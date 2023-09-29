@@ -53,4 +53,9 @@ class Company extends Authenticatable
     {
         return $this->belongsToMany(Company::class, 'company_links', 'linked_company_id', 'company_id');
     }
+
+    public function industries()
+    {
+        return $this->belongsToMany(Industry::class);
+    }
 }

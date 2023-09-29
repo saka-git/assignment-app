@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\AdminRegisterController;
 use App\Http\Controllers\Company\CompanyLoginController;
 use App\Http\Controllers\Company\CompanyRegisterController;
 use App\Http\Controllers\Company\CompanySwitchController;
+use App\Http\Controllers\Admin\IndustryController;
+use App\Http\Controllers\Company\CompanyIndustryController;
 
 
 /*
@@ -38,7 +40,7 @@ require __DIR__ . '/auth.php';
 
 /*
 |--------------------------------------------------------------------------
-| 管理者用ルーティング
+| 企業用ルーティング
 |--------------------------------------------------------------------------
 */
 Route::prefix('company')->name('company.')->group(function () {
@@ -51,10 +53,6 @@ Route::prefix('company')->name('company.')->group(function () {
     Route::get('/login', [CompanyLoginController::class, 'showLoginPage']);
     Route::post('/login', [CompanyLoginController::class, 'login'])->name('login');
 
-    // アカウント切り替え
-    Route::get('/link', [CompanySwitchController::class, 'create'])->name('link.create');
-    Route::post('/link', [CompanySwitchController::class, 'link'])->name('link');
-    Route::get('/switch/{companyId}', [CompanySwitchController::class, 'switch'])->name('switch');
 
     // 以下の中は認証必須のエンドポイントとなる
     Route::middleware(['auth:company'])->group(function () {
@@ -62,6 +60,15 @@ Route::prefix('company')->name('company.')->group(function () {
         Route::get('/dashboard', function () {
             return view('company.dashboard');
         })->name('dashboard');
+
+        // アカウント切り替え
+        Route::get('/link', [CompanySwitchController::class, 'create'])->name('link.create');
+        Route::post('/link', [CompanySwitchController::class, 'link'])->name('link');
+        Route::get('/switch/{companyId}', [CompanySwitchController::class, 'switch'])->name('switch');
+
+        // 業種登録
+        Route::get('/industry', [CompanyIndustryController::class, 'index'])->name('industry');
+        Route::post('/industry', [CompanyIndustryController::class, 'store'])->name('industry.store');
     });
 });
 
@@ -87,5 +94,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', function () {
             return view('admin.dashboard');
         })->name('dashboard');
+        Route::resource('/industry', IndustryController::class)->except(['show']);
     });
 });

@@ -30,7 +30,7 @@
     </header>
 
     <!-- Page Content -->
-    <main class="grid grid-cols-5">
+    <main class="">
       @yield('content')
     </main>
   </div>

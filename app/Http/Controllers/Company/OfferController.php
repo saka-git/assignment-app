@@ -1,0 +1,92 @@
+<?php
+
+namespace App\Http\Controllers\Company;
+
+use Illuminate\Http\Request;
+use App\Models\Offer;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+use App\Models\Feature;
+
+class OfferController extends Controller
+{
+
+    public function index()
+    {
+        $offers = Offer::where('company_id', Auth::guard('company')->user()->id)->paginate(10);
+
+        return view('company.offer.index', compact('offers'));
+    }
+
+    public function create()
+    {
+        $features = Feature::all();
+        return view('company.offer.create', compact('features'));
+    }
+
+    public function store(Request $request)
+    {
+
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'requirements' => 'required',
+            'benefits' => 'required',
+        ]);
+
+        $offer = new Offer();
+        $offer->name = $request->name;
+        $offer->description = $request->description;
+        $offer->requirements = $request->requirements;
+        $offer->benefits = $request->benefits;
+        $offer->company_id = Auth::guard('company')->user()->id;
+        $offer->save();
+        $offer->features()->sync($request->input('feature'));
+
+        return redirect()->route('company.offer.index');
+    }
+
+    public function show(Offer $offer)
+    {
+        $this->authorize('show', $offer);
+
+        return view('company.offer.show', compact('offer'));
+    }
+
+    public function edit(Offer $offer)
+    {
+        $features = Feature::all();
+
+        return view('company.offer.edit', compact('offer', 'features'));
+    }
+
+    public function update(Request $request, Offer $offer)
+    {
+        $this->authorize('update', $offer);
+
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'requirements' => 'required',
+            'benefits' => 'required',
+        ]);
+
+        $offer->name = $request->name;
+        $offer->description = $request->description;
+        $offer->requirements = $request->requirements;
+        $offer->benefits = $request->benefits;
+        $offer->update();
+        $offer->features()->sync($request->input('feature'));
+
+
+        return redirect()->route('company.offer.index');
+    }
+
+    public function destroy(Offer $offer)
+    {
+        $this->authorize('delete', $offer);
+
+        $offer->delete();
+        return redirect()->route('company.offer.index');
+    }
+}

@@ -10,7 +10,10 @@ use App\Http\Controllers\Company\CompanySwitchController;
 use App\Http\Controllers\Admin\IndustryController;
 use App\Http\Controllers\Company\CompanyIndustryController;
 use App\Http\Controllers\Admin\FeatureController;
-
+use App\Http\Controllers\Company\OfferController;
+use App\Http\Controllers\Admin\AdminOfferController;
+use App\Http\Controllers\User\UserOfferController;
+use App\Http\Controllers\Admin\AdminCompanyController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,6 +37,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::resource('offer', UserOfferController::class)->only(['index', 'show']);
 });
 
 require __DIR__ . '/auth.php';
@@ -69,6 +74,9 @@ Route::prefix('company')->name('company.')->group(function () {
         // 業種登録
         Route::get('/industry', [CompanyIndustryController::class, 'index'])->name('industry');
         Route::post('/industry', [CompanyIndustryController::class, 'store'])->name('industry.store');
+
+        // 求人
+        Route::resource('/offer', OfferController::class);
     });
 });
 
@@ -94,7 +102,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', function () {
             return view('admin.dashboard');
         })->name('dashboard');
+
+        // 業種
         Route::resource('/industry', IndustryController::class)->except(['show']);
+        // 特徴
         Route::resource('/feature', FeatureController::class)->except(['show']);
+        // 求人
+        Route::resource('/offer', AdminOfferController::class)->except(['create', 'store']);
+        // 企業
+        Route::resource('/company', AdminCompanyController::class)->except(['create', 'store']);
     });
 });

@@ -26,4 +26,9 @@ class Offer extends Model
     {
         return $this->belongsToMany(Feature::class);
     }
+
+    public function applications()
+    {
+        return $this->hasMany(Application::class, 'offer_id');
+    }
 }

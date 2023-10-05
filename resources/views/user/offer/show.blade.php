@@ -6,6 +6,11 @@
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
+      @if (session('error'))
+        <div class="text-red-500">
+          {{ session('error') }}
+        </div>
+      @endif
 
       <p>求人名</p>
       <p>{{ $offer->name }}</p>
@@ -27,7 +32,7 @@
         <p>{{ $feature->name }}</p>
       @endforeach
 
-      <a class="text-blue-500" href="">応募</a>
+      <a class="text-blue-500" href="{{ route('application.create', $offer->id) }}">応募</a>
 
       <a class="text-red-500" href="{{ route('offer.index') }}">戻る</a>
 

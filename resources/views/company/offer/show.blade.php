@@ -1,27 +1,34 @@
 @extends('layouts.company.app')
 
-@section('title', 'company業界一覧 編集')
+@section('title', 'company求人 詳細')
 
 @section('content')
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
 
-      <label for="name">求人名</label>
+      <p>求人名</p>
       <p>{{ $offer->name }}</p>
 
-      <label for="description">職務内容</label>
+      <p>職務内容</p>
       <p>{!! nl2br($offer->description) !!}</p>
 
-      <label for="requirements">応募資格</label>
+      <p>応募資格</p>
       <p>{!! nl2br($offer->requirements) !!}</p>
 
-      <label for="benefits">福利厚生</label>
+      <p>福利厚生</p>
       <p>{!! nl2br($offer->benefits) !!}</p>
 
-      <legend>特徴</legend>
+      <p>特徴</p>
       @foreach ($offer->features as $feature)
         <p>{{ $feature->name }}</p>
+      @endforeach
+
+      <p>応募者</p>
+      @foreach ($applications as $application)
+        <a class="text-blue-500" href="{{ route('company.application.show', $application->id) }}">
+          {{ $application->user->name }}
+        </a>
       @endforeach
 
       <a class="text-red-500" href="{{ route('company.offer.index') }}">戻る</a>

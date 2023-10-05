@@ -14,6 +14,9 @@ use App\Http\Controllers\Company\OfferController;
 use App\Http\Controllers\Admin\AdminOfferController;
 use App\Http\Controllers\User\UserOfferController;
 use App\Http\Controllers\Admin\AdminCompanyController;
+use App\Http\Controllers\User\ApplicationController;
+use App\Http\Controllers\Company\CompanyApplicationController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,6 +42,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('offer', UserOfferController::class)->only(['index', 'show']);
+    Route::get('application/create/{offer_id}', [ApplicationController::class, 'create'])->name('application.create');
+    Route::resource('application', ApplicationController::class)->except(['create']);
 });
 
 require __DIR__ . '/auth.php';
@@ -77,6 +82,9 @@ Route::prefix('company')->name('company.')->group(function () {
 
         // 求人
         Route::resource('/offer', OfferController::class);
+
+        // 応募
+        Route::resource('/application', CompanyApplicationController::class)->only(['index', 'show']);
     });
 });
 

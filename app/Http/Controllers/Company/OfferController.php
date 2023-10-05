@@ -48,9 +48,11 @@ class OfferController extends Controller
 
     public function show(Offer $offer)
     {
-        $this->authorize('show', $offer);
+        $this->authorize('viewAny', $offer);
 
-        return view('company.offer.show', compact('offer'));
+        $applications = $offer->applications()->paginate(10);
+
+        return view('company.offer.show', compact('offer', 'applications'));
     }
 
     public function edit(Offer $offer)
@@ -62,7 +64,7 @@ class OfferController extends Controller
 
     public function update(Request $request, Offer $offer)
     {
-        $this->authorize('update', $offer);
+        $this->authorize('viewAny', $offer);
 
         $request->validate([
             'name' => 'required',
@@ -84,7 +86,7 @@ class OfferController extends Controller
 
     public function destroy(Offer $offer)
     {
-        $this->authorize('delete', $offer);
+        $this->authorize('viewAny', $offer);
 
         $offer->delete();
         return redirect()->route('company.offer.index');

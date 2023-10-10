@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use GuzzleHttp\Promise\Create;
 use App\Models\Application;
+use App\Mail\SendUserMail;
+use Illuminate\Support\Facades\Mail;
 
 class ApplicationController extends Controller
 {
@@ -72,6 +74,14 @@ class ApplicationController extends Controller
             'email' => auth()->user()->email,
             'motivation' => $request->motivation,
         ]);
+
+        // 保存したデータを取得
+        $application = Application::where('user_id', auth()->user()->id)
+            ->where('offer_id', $request->offer_id)
+            ->first();
+
+        // メール送信
+        Mail::to(auth()->user()->email)->send(new SendUserMail($application));
 
         return redirect()->route('application.index');
     }

@@ -31,7 +31,7 @@ use App\Http\Controllers\User\UserMessageController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('top');
 });
 
 Route::get('/dashboard', function () {
@@ -69,6 +69,8 @@ Route::prefix('company')->name('company.')->group(function () {
     // ログイン
     Route::get('/login', [CompanyLoginController::class, 'showLoginPage']);
     Route::post('/login', [CompanyLoginController::class, 'login'])->name('login');
+    // ログアウト
+    Route::post('/logout', [CompanyLoginController::class, 'logout'])->name('logout');
 
 
     // 以下の中は認証必須のエンドポイントとなる
@@ -119,6 +121,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // ログイン
     Route::get('/login', [AdminLoginController::class, 'showLoginPage']);
     Route::post('/login', [AdminLoginController::class, 'login'])->name('login');
+    // ログアウト
+    Route::post('/logout', [AdminLoginController::class, 'logout'])->name('logout');
 
     // 以下の中は認証必須のエンドポイントとなる
     Route::middleware(['auth:admin'])->group(function () {

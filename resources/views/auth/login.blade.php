@@ -2,7 +2,10 @@
   <!-- Session Status -->
   <x-auth-session-status class="mb-4" :status="session('status')" />
 
-  <h1>Userログイン</h1>
+  <div class="flex justify-between">
+    <h1>Userログイン</h1>
+    <a class="text-blue-500" href="{{ route('company.login') }}">Companyへ</a>
+  </div>
   <form method="POST" action="{{ route('login') }}">
     @csrf
 

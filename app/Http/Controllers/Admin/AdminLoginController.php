@@ -31,4 +31,14 @@ class AdminLoginController extends Controller
             'login' => ['ログインに失敗しました'],
         ]);
     }
+
+    // ログアウト
+    public function logout(): RedirectResponse
+    {
+        Auth::guard('admin')->logout();
+
+        return redirect()->route('admin.login')->with([
+            'logout_msg' => 'ログアウトしました。',
+        ]);
+    }
 }

@@ -31,4 +31,14 @@ class CompanyLoginController extends Controller
             'login' => ['ログインに失敗しました'],
         ]);
     }
+
+    // ログアウト
+    public function logout(): RedirectResponse
+    {
+        Auth::guard('company')->logout();
+
+        return redirect()->route('company.login')->with([
+            'logout_msg' => 'ログアウトしました。',
+        ]);
+    }
 }

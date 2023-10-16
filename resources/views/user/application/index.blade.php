@@ -28,6 +28,8 @@
             <button class="text-red-500" type="submit">削除</button>
           </form>
 
+          <a class="text-purple-500" href="{{ route('messages.show', $application->offer->company->id) }}">メッセージ</a>
+
         </div>
       @endforeach
     </div>

@@ -5,10 +5,13 @@ namespace App\Providers;
 // use Illuminate\Support\Facades\Gate;
 
 use App\Models\Application;
+use App\Models\Message;
 use App\Models\Offer;
 use App\Policies\OfferPolicy;
 use App\Policies\ApplicationPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use App\Policies\MessagePolicy;
+
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -20,6 +23,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         Offer::class => OfferPolicy::class,
         Application::class => ApplicationPolicy::class,
+        Message::class => MessagePolicy::class,
     ];
 
     /**

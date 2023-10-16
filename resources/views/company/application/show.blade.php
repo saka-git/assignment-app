@@ -26,8 +26,7 @@
       <p>志望動機</p>
       <p>{!! nl2br($application->motivation) !!}</p>
 
-      <p>メッセージ</p>
-
+      <a class="text-blue-500" href="{{ route('company.messages.show', $application->user->id) }}">メッセージ</a>
 
       <a class="text-red-500" href="{{ route('company.application.index') }}">戻る</a>
 

@@ -63,4 +63,14 @@ class Company extends Authenticatable
     {
         return $this->hasMany(Offer::class);
     }
+
+    public function sentMessages()
+    {
+        return $this->morphMany(Message::class, 'sender');
+    }
+
+    public function receivedMessages()
+    {
+        return $this->morphMany(Message::class, 'recipient');
+    }
 }

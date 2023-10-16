@@ -16,6 +16,8 @@ use App\Http\Controllers\User\UserOfferController;
 use App\Http\Controllers\Admin\AdminCompanyController;
 use App\Http\Controllers\User\ApplicationController;
 use App\Http\Controllers\Company\CompanyApplicationController;
+use App\Http\Controllers\Company\CompanyMessageController;
+use App\Http\Controllers\User\UserMessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +46,11 @@ Route::middleware('auth')->group(function () {
     Route::resource('offer', UserOfferController::class)->only(['index', 'show']);
     Route::get('application/create/{offer_id}', [ApplicationController::class, 'create'])->name('application.create');
     Route::resource('application', ApplicationController::class)->except(['create']);
+
+    // メッセージ
+    Route::get('/messages', [UserMessageController::class, 'index'])->name('messages.index');
+    Route::post('/messages/{company}', [UserMessageController::class, 'store'])->name('messages.store');
+    Route::get('/messages/{company}', [UserMessageController::class, 'show'])->name('messages.show');
 });
 
 require __DIR__ . '/auth.php';
@@ -85,6 +92,15 @@ Route::prefix('company')->name('company.')->group(function () {
 
         // 応募
         Route::resource('/application', CompanyApplicationController::class)->only(['index', 'show']);
+
+        // メッセージ
+        // メッセージ
+        Route::get(
+            '/messages',
+            [CompanyMessageController::class, 'index']
+        )->name('messages.index');
+        Route::post('/messages/{user}', [CompanyMessageController::class, 'store'])->name('messages.store');
+        Route::get('/messages/{user}', [CompanyMessageController::class, 'show'])->name('messages.show');
     });
 });
 

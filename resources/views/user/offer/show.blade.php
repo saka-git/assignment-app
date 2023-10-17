@@ -4,37 +4,53 @@
 
 @section('content')
   <div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 bg-white p-6 rounded-lg shadow-md">
 
       @if (session('error'))
-        <div class="text-red-500">
+        <div class="bg-red-500 text-white p-4 rounded-md mb-6">
           {{ session('error') }}
         </div>
       @endif
 
-      <p>求人名</p>
-      <p>{{ $offer->name }}</p>
+      <div class="mb-4">
+        <span class="text-gray-600 font-medium block">求人名:</span>
+        <p class="text-lg mt-1">{{ $offer->name }}</p>
+      </div>
 
-      <p>会社名</p>
-      <p>{{ $offer->company->name }}</p>
+      <div class="mb-4">
+        <span class="text-gray-600 font-medium block">会社名:</span>
+        <p class="text-lg mt-1">{{ $offer->company->name }}</p>
+      </div>
 
-      <p>職務内容</p>
-      <p>{!! nl2br($offer->description) !!}</p>
+      <div class="mb-4">
+        <span class="text-gray-600 font-medium block">職務内容:</span>
+        <p class="text-lg mt-1 whitespace-pre-line">{{ $offer->description }}</p>
+      </div>
 
-      <p>応募資格</p>
-      <p>{!! nl2br($offer->requirements) !!}</p>
+      <div class="mb-4">
+        <span class="text-gray-600 font-medium block">応募資格:</span>
+        <p class="text-lg mt-1 whitespace-pre-line">{{ $offer->requirements }}</p>
+      </div>
 
-      <p>福利厚生</p>
-      <p>{!! nl2br($offer->benefits) !!}</p>
+      <div class="mb-4">
+        <span class="text-gray-600 font-medium block">福利厚生:</span>
+        <p class="text-lg mt-1 whitespace-pre-line">{{ $offer->benefits }}</p>
+      </div>
 
-      <legend>特徴</legend>
-      @foreach ($offer->features as $feature)
-        <p>{{ $feature->name }}</p>
-      @endforeach
+      <div class="mb-4">
+        <span class="text-gray-600 font-medium block">特徴:</span>
+        <ul class="list-disc pl-5 mt-2">
+          @foreach ($offer->features as $feature)
+            <li class="mb-1">{{ $feature->name }}</li>
+          @endforeach
+        </ul>
+      </div>
 
-      <a class="text-blue-500" href="{{ route('application.create', $offer->id) }}">応募</a>
-
-      <a class="text-red-500" href="{{ route('offer.index') }}">戻る</a>
+      <div class="flex items-center space-x-4">
+        <a href="{{ route('application.create', $offer->id) }}"
+          class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none">応募</a>
+        <a href="{{ route('offer.index') }}" class="text-red-500 hover:underline">戻る</a>
+      </div>
 
     </div>
   </div>

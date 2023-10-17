@@ -60,7 +60,7 @@ class ApplicationController extends Controller
         $request->validate([
             'offer_id' => 'required|integer|exists:offers,id',
             'address' => 'required',
-            'phone' => 'required',
+            'phone' => 'required|regex:/^(0{1}\d{1,4}-{0,1}\d{1,4}-{0,1}\d{4})$/',
             'motivation' => 'required',
         ]);
 

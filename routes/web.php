@@ -72,7 +72,6 @@ Route::prefix('company')->name('company.')->group(function () {
     // ログアウト
     Route::post('/logout', [CompanyLoginController::class, 'logout'])->name('logout');
 
-
     // 以下の中は認証必須のエンドポイントとなる
     Route::middleware(['auth:company'])->group(function () {
         // ダッシュボード

@@ -14,13 +14,12 @@ return new class extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->text('content');
-            $table->unsignedBigInteger('sender_id');
-            $table->string('sender_type');
-            $table->unsignedBigInteger('recipient_id');
-            $table->string('recipient_type');
+            $table->morphs('sender');
+            $table->morphs('recipient');
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

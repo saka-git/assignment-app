@@ -24,8 +24,12 @@ class UserMessageController extends Controller
         // IDリストを使用して企業のリストを取得
         $companies = Company::whereIn('id', $interactedCompanyIds)->get();
 
+        // 応募した企業リストを取得
+        $appliedCompanies = $user->applications->map(function ($application) {
+            return $application->offer->company;
+        })->unique('id');
 
-        return view('user.messages.index', compact('companies'));
+        return view('user.messages.index', compact('companies', 'appliedCompanies'));
     }
 
     public function store(Request $request, Company $company)

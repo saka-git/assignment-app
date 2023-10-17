@@ -24,8 +24,15 @@ class CompanyMessageController extends Controller
         // IDリストを使用して企業のリストを取得
         $users = User::whereIn('id', $interactedUserIds)->get();
 
+        // 応募者リストを取得
+        $appliedUsers = $company->offers->flatMap(function ($offer) {
+            return $offer->applications->map(function ($application) {
+                return $application->user;
+            });
+        })->unique('id');
 
-        return view('company.messages.index', compact('users'));
+
+        return view('company.messages.index', compact('users', 'appliedUsers'));
     }
 
     public function store(Request $request, User $user)

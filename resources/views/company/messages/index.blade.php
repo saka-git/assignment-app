@@ -31,6 +31,10 @@
         @endif
 
         <p>応募者にメッセージを送る</p>
+        @foreach ($appliedUsers as $appliedUser)
+          <a class="inline-block p-2 text-blue-600 hover:underline"
+            href="{{ route('company.messages.show', $appliedUser->id) }}">{{ $appliedUser->name }}</a>
+        @endforeach
       </div>
 
     </div>

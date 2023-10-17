@@ -8,6 +8,8 @@
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
       <form action="{{ route('admin.offer.index') }}" method="GET">
+        @csrf
+
         <label for="name">名前:</label>
         <input type="text" name="name" value="{{ request('name') }}">
 

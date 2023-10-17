@@ -4,7 +4,7 @@
 
   <div class="flex justify-between">
     <h1>Companyログイン</h1>
-    <a class="text-blue-500" href="{{ route('login') }}">Userへ</a>
+    <a class="text-blue-500" href="{{ route('top') }}">Topへ</a>
   </div>
   <form method="POST" action="{{ route('company.login') }}">
     @csrf

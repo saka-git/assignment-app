@@ -32,7 +32,7 @@ use App\Http\Controllers\User\UserMessageController;
 
 Route::get('/', function () {
     return view('top');
-});
+})->name('top');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -33,7 +33,7 @@
               <button class="text-red-500 hover:underline" type="submit">削除</button>
             </form>
             <a class="text-purple-500 hover:underline"
-              href="{{ route('messages.show', $application->offer->company->id) }}">メッセージ</a>
+              href="{{ route('messages.show', $application->offer->company_id) }}">メッセージ</a>
           </div>
         </div>
       @endforeach

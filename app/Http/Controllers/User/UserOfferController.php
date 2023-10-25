@@ -17,6 +17,8 @@ class UserOfferController extends Controller
 
         $query = Offer::query();
 
+        $query->with('company');
+
         // 名前による検索
         if ($request->filled('name')) {
             $query->where('name', 'like', "%{$request->input('name')}%");

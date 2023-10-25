@@ -50,7 +50,9 @@ class OfferController extends Controller
     {
         $this->authorize('viewAny', $offer);
 
-        $applications = $offer->applications()->paginate(10);
+        $offer->load('features');
+
+        $applications = $offer->applications()->with('user')->paginate(10);
 
         return view('company.offer.show', compact('offer', 'applications'));
     }

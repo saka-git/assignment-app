@@ -35,12 +35,17 @@ class AdminCompanyController extends Controller
 
     public function show(Company $company)
     {
+        $company->load('industries');
+
         return view('admin.company.show', compact('company'));
     }
 
     public function edit(Company $company)
     {
         $industries = Industry::all();
+
+        $company->load('industries');
+
 
         return view('admin.company.edit', compact('company', 'industries'));
     }

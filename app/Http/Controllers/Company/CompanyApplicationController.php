@@ -13,6 +13,8 @@ class CompanyApplicationController extends Controller
     {
         $query = Application::query();
 
+        $query->with(['offer', 'user']);
+
         $query->whereHas('offer', function ($q) {
             $q->where('company_id', auth('company')->user()->id);
         });

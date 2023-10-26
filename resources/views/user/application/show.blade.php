@@ -7,6 +7,11 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
       <div class="p-6 text-gray-900 dark:text-gray-100 bg-white shadow-md rounded-lg">
+        @if (session('success'))
+          <div class="bg-blue-500 text-white p-4 rounded-md mb-6">
+            {{ session('success') }}
+          </div>
+        @endif
         <div class="mb-4">
           <p class="text-sm font-semibold text-gray-600">会社名</p>
           <p class="text-lg">{{ $application->offer->company->name }}</p>

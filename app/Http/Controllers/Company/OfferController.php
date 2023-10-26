@@ -43,7 +43,7 @@ class OfferController extends Controller
         $offer->save();
         $offer->features()->sync($request->input('feature'));
 
-        return redirect()->route('company.offer.index');
+        return redirect()->route('company.offer.show', $offer->id)->with('success', '求人を作成しました。');
     }
 
     public function show(Offer $offer)
@@ -83,7 +83,7 @@ class OfferController extends Controller
         $offer->features()->sync($request->input('feature'));
 
 
-        return redirect()->route('company.offer.index');
+        return redirect()->route('company.offer.index')->with('success', '求人を更新しました。');
     }
 
     public function destroy(Offer $offer)
@@ -91,6 +91,6 @@ class OfferController extends Controller
         $this->authorize('viewAny', $offer);
 
         $offer->delete();
-        return redirect()->route('company.offer.index');
+        return redirect()->route('company.offer.index')->with('success', '求人を削除しました。');
     }
 }

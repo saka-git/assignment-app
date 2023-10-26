@@ -7,6 +7,15 @@
 @section('content')
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      @if ($errors->any())
+        <div class="bg-red-500 text-white p-4 rounded-md mb-6">
+          <ul class="list-disc pl-5">
+            @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+      @endif
       <form action="{{ route('company.offer.store') }}" method="POST">
         @csrf
 

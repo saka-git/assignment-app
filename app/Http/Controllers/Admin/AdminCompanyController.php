@@ -60,12 +60,12 @@ class AdminCompanyController extends Controller
         $company->update();
         $company->industries()->sync($request->input('industry'));
 
-        return redirect()->route('admin.company.index');
+        return redirect()->route('admin.company.index')->with('success', '企業を更新しました。');
     }
 
     public function destroy(Company $company)
     {
         $company->delete();
-        return redirect()->route('admin.company.index');
+        return redirect()->route('admin.company.index')->with('success', '企業を削除しました。');
     }
 }

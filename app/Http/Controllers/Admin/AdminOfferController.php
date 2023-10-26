@@ -53,34 +53,7 @@ class AdminOfferController extends Controller
         return view('admin.offer.index', compact('offers', 'features', 'industries'));
     }
 
-    // public function create()
-    // {
-    //     $features = Feature::all();
 
-    //     return view('admin.offer.create', compact('features'));
-    // }
-
-    // public function store(Request $request)
-    // {
-    //     $request->validate([
-    //         'name' => 'required',
-    //         'description' => 'required',
-    //         'requirements' => 'required',
-    //         'benefits' => 'required',
-    //         'conpany_id' => 'required',
-    //     ]);
-
-    //     $offer = new Offer();
-    //     $offer->name = $request->name;
-    //     $offer->description = $request->description;
-    //     $offer->requirements = $request->requirements;
-    //     $offer->benefits = $request->benefits;
-    //     $offer->company_id = $request->company_id;
-    //     $offer->save();
-    //     $offer->features()->sync($request->input('feature'));
-
-    //     return redirect()->route('admin.offer.index');
-    // }
 
     public function show(Offer $offer)
     {
@@ -110,12 +83,12 @@ class AdminOfferController extends Controller
         $offer->update();
         $offer->features()->sync($request->input('feature'));
 
-        return redirect()->route('admin.offer.index');
+        return redirect()->route('admin.offer.index')->with('success', '求人を更新しました。');
     }
 
     public function destroy(Offer $offer)
     {
         $offer->delete();
-        return redirect()->route('admin.offer.index');
+        return redirect()->route('admin.offer.index')->with('success', '求人を削除しました。');
     }
 }

@@ -35,7 +35,7 @@ class FeatureController extends Controller
             'name' => $request->name,
         ]);
 
-        return redirect()->route('admin.feature.index');
+        return redirect()->route('admin.feature.index')->with('success', '特徴を作成しました。');
     }
 
     /**
@@ -57,7 +57,7 @@ class FeatureController extends Controller
         $feature->name = $request->name;
         $feature->update();
 
-        return redirect()->route('admin.feature.index');
+        return redirect()->route('admin.feature.index')->with('success', '特徴を更新しました。');
     }
 
     /**
@@ -68,6 +68,6 @@ class FeatureController extends Controller
         $feature = feature::find($id);
         $feature->delete();
 
-        return redirect()->route('admin.feature.index');
+        return redirect()->route('admin.feature.index')->with('success', '特徴を削除しました。');
     }
 }

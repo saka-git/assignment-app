@@ -83,7 +83,7 @@ class ApplicationController extends Controller
         // メール送信
         Mail::to(auth()->user()->email)->send(new SendUserMail($application));
 
-        return redirect()->route('application.index');
+        return redirect()->route('application.show', $application->id)->with('success', '応募が完了しました。');
     }
 
     /**
@@ -136,6 +136,6 @@ class ApplicationController extends Controller
 
         $application->delete();
 
-        return redirect()->route('application.index');
+        return redirect()->route('application.index')->with('success', '応募を取り消しました。');
     }
 }

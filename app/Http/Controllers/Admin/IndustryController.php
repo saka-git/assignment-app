@@ -35,7 +35,7 @@ class IndustryController extends Controller
             'name' => $request->name,
         ]);
 
-        return redirect()->route('admin.industry.index');
+        return redirect()->route('admin.industry.index')->with('success', '業界を作成しました。');
     }
 
     /**
@@ -57,7 +57,7 @@ class IndustryController extends Controller
         $industry->name = $request->name;
         $industry->update();
 
-        return redirect()->route('admin.industry.index');
+        return redirect()->route('admin.industry.index')->with('success', '業界を更新しました。');
     }
 
     /**
@@ -68,6 +68,6 @@ class IndustryController extends Controller
         $industry = Industry::find($id);
         $industry->delete();
 
-        return redirect()->route('admin.industry.index');
+        return redirect()->route('admin.industry.index')->with('success', '業界を削除しました。');
     }
 }

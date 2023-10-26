@@ -6,6 +6,12 @@
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
 
+      @if (session('success'))
+        <div class="text-green-500 mb-4 p-4 border border-green-600 bg-green-100 rounded">
+          {{ session('success') }}
+        </div>
+      @endif
+
       @if (session('error'))
         <div class="text-red-500 mb-4 p-4 border border-red-600 bg-red-100 rounded">
           {{ session('error') }}

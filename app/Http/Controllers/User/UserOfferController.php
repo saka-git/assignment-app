@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Application;
 use App\Models\Offer;
 use App\Models\Feature;
 use App\Models\Industry;
@@ -53,7 +54,9 @@ class UserOfferController extends Controller
 
         $industries = Industry::all();
 
-        return view('user.offer.index', compact('offers', 'features', 'industries'));
+        $applications = Application::where('user_id', auth()->user()->id)->get();
+
+        return view('user.offer.index', compact('offers', 'features', 'industries', 'applications'));
     }
 
     public function show(Offer $offer)

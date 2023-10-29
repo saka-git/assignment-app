@@ -124,7 +124,7 @@ class ApplicationController extends Controller
         $application->motivation = $request->motivation;
         $application->update();
 
-        return redirect()->route('application.index');
+        return redirect()->route('application.index')->with('success', '応募を更新しました。');
     }
 
     /**

@@ -67,7 +67,7 @@ class UserMessageController extends Controller
         // $company = Company::findOrFail($company->id);
 
 
-        // 選択された企業とのメッセージのやり取りを取得
+        // 選択された企業とのメッセージのやり取りを作成順に取得
         $messages = Message::where(function ($query) use ($user, $company) {
             $query->where('sender_id', $user->id)
                 ->where('sender_type', get_class($user))
@@ -78,7 +78,7 @@ class UserMessageController extends Controller
                 ->where('sender_type', get_class($company))
                 ->where('recipient_id', $user->id)
                 ->where('recipient_type', get_class($user));
-        })->get();
+        })->orderBy('created_at', 'asc')->get();
 
         return view('user.messages.show', compact('companies', 'messages', 'company'));
     }

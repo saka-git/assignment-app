@@ -79,7 +79,7 @@ class CompanyMessageController extends Controller
                 ->where('sender_type', get_class($user))
                 ->where('recipient_id', $company->id)
                 ->where('recipient_type', get_class($company));
-        })->get();
+        })->orderBy('created_at', 'asc')->get();
 
         return view('company.messages.show', compact('users', 'messages', 'user'));
     }

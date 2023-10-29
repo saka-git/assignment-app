@@ -53,6 +53,11 @@
           </div>
 
           <a href="{{ route('offer.show', $offer->id) }}" class="text-green-500 hover:underline">詳細</a>
+          @foreach ($applications as $application)
+            @if ($application->offer_id == $offer->id)
+              <a href="{{ route('application.show', $application->id) }}" class="text-red-500 hover:underline">応募済み</a>
+            @endif
+          @endforeach
         </div>
       @endforeach
 

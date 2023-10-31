@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Company;
 
 use App\Http\Controllers\Controller;
 use App\Models\Company;
+use App\Models\CompanyAccount;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -26,20 +27,26 @@ class CompanyRegisterController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . Company::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . CompanyAccount::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $company = Company::create([
+            'name' => $request->companyName,
+        ]);
+
+        $companyAccount = CompanyAccount::create([
+            'company_id' => $company->id,
+            'role' => 'admin',
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
-        event(new Registered($company));
+        event(new Registered($companyAccount));
 
-        Auth::guard('company')->login($company);
+        Auth::guard('company')->login($companyAccount);
 
-        return redirect('/company/login');
+        return redirect('/company/dashboard');
     }
 }

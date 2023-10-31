@@ -62,17 +62,17 @@
             </x-dropdown-link> --}}
 
 
-            <!-- アカウント切り替えのリンク -->
+            {{-- <!-- アカウント切り替えのリンク -->
             @foreach (auth('company')->user()->linkedCompanies as $linkedCompany)
               <x-dropdown-link :href="route('company.switch', $linkedCompany->id)">
                 {{ $linkedCompany->name }}
               </x-dropdown-link>
-            @endforeach
+            @endforeach --}}
 
-            <!-- 切り替えアカウントの追加 -->
+            {{-- <!-- 切り替えアカウントの追加 -->
             <x-dropdown-link :href="route('company.link.create')">
               追加
-            </x-dropdown-link>
+            </x-dropdown-link> --}}
 
             <!-- Authentication -->
             <form method="POST" action="{{ route('company.logout') }}">
@@ -124,10 +124,10 @@
           {{ __('Profile') }}
         </x-responsive-nav-link> --}}
 
-        <!-- 切り替えアカウントの追加 -->
+        {{-- <!-- 切り替えアカウントの追加 -->
         <x-responsive-nav-link :href="route('company.link.create')">
           追加
-        </x-responsive-nav-link>
+        </x-responsive-nav-link> --}}
 
         <!-- Authentication -->
         <form method="POST" action="{{ route('company.logout') }}">

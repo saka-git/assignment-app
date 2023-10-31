@@ -12,16 +12,16 @@ class CompanyIndustryController extends Controller
     public function index()
     {
         $industries = Industry::all();
-        $registered_industries = Auth::guard('company')->user()->industries;
+        $registered_industries = Auth::guard('company')->user()->company->industries->pluck('id')->toArray();
 
-        return view('company.industry', compact('industries'));
+        return view('company.industry', compact('industries', 'registered_industries'));
     }
 
     public function store(Request $request)
     {
 
         // ログイン中の会社を取得
-        $company = Auth::guard('company')->user();
+        $company = Auth::guard('company')->user()->company;
 
         // リクエストから業界のIDの配列を取得
         $industryIds = $request->input('industry');

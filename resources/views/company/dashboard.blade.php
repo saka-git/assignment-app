@@ -12,6 +12,10 @@
           <h1>Companyのダッシュボード</h1>
           {{ __("You're logged in!") }}
 
+          <p>企業名</p>
+          <p>{{ Auth::guard('company')->user()->company->name }}</p>
+
+          <p>アカウント名</p>
           <div>{{ Auth::guard('company')->user()->name }}</div>
 
         </div>

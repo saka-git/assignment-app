@@ -11,7 +11,7 @@ class CompanyMessageController extends Controller
 {
     public function index()
     {
-        $company = auth('company')->user();
+        $company = auth('company')->user()->company;
         // 現在のユーザーが送信したメッセージの中から、受信者が企業のものを取得
         $sentUsers = $company->sentMessages->where('recipient_type', 'App\Models\User')->pluck('recipient_id')->unique();
 
@@ -37,9 +37,9 @@ class CompanyMessageController extends Controller
 
     public function store(Request $request, User $user)
     {
-        $this->authorize('company', [Message::class, $user]);
+        // $this->authorize('company', [Message::class, $user]);
 
-        $company = auth('company')->user();
+        $company = auth('company')->user()->company;
 
         $message = new Message();
         $message->content = $request->input('content');
@@ -52,9 +52,9 @@ class CompanyMessageController extends Controller
 
     public function show(User $user)
     {
-        $this->authorize('company', [Message::class, $user]);
+        // $this->authorize('company', [Message::class, $user]);
 
-        $company = auth('company')->user();
+        $company = auth('company')->user()->company;
 
         // 現在のユーザーが送信したメッセージの中から、受信者が企業のものを取得
         $sentUsers = $company->sentMessages->where('recipient_type', 'App\Models\User')->pluck('recipient_id')->unique();

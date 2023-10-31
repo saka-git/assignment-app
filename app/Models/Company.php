@@ -21,6 +21,7 @@ class Company extends Authenticatable
         'name',
         'email',
         'password',
+        'parent_company_id',
     ];
 
     /**
@@ -44,6 +45,16 @@ class Company extends Authenticatable
     ];
 
     // リレーション
+    public function parentCompany()
+    {
+        return $this->belongsTo(Company::class, 'parent_company_id');
+    }
+
+    public function subCompanies()
+    {
+        return $this->hasMany(Company::class, 'parent_company_id');
+    }
+
     public function linkedCompanies()
     {
         return $this->belongsToMany(Company::class, 'company_links', 'company_id', 'linked_company_id');

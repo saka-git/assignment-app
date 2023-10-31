@@ -18,6 +18,7 @@ use App\Http\Controllers\User\ApplicationController;
 use App\Http\Controllers\Company\CompanyApplicationController;
 use App\Http\Controllers\Company\CompanyMessageController;
 use App\Http\Controllers\User\UserMessageController;
+use App\Http\Controllers\Company\SubCompanyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,6 +79,11 @@ Route::prefix('company')->name('company.')->group(function () {
         Route::get('/dashboard', function () {
             return view('company.dashboard');
         })->name('dashboard');
+
+        // サブアカウント
+        Route::get('/sub', [SubCompanyController::class, 'index'])->name('sub.index');
+        Route::get('/sub/create', [SubCompanyController::class, 'create'])->name('sub.create');
+        Route::post('/sub', [SubCompanyController::class, 'store'])->name('sub.store');
 
         // アカウント切り替え
         Route::get('/link', [CompanySwitchController::class, 'create'])->name('link.create');

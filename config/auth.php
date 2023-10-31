@@ -50,7 +50,7 @@ return [
         // Company guard追加
         'company' => [
             'driver' => 'session',
-            'provider' => 'companies',
+            'provider' => 'company_accounts',
         ],
     ],
 
@@ -89,9 +89,9 @@ return [
         ],
 
         // Admin provider追加
-        'companies' => [
+        'company_accounts' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Company::class,
+            'model' => App\Models\CompanyAccount::class,
         ],
     ],
 

@@ -17,7 +17,7 @@
 
         @foreach ($industries as $industry)
           <input type="checkbox" name="industry[]" value="{{ $industry->id }}" id="industry-{{ $industry->id }}"
-            {{ in_array($industry->id,auth('company')->user()->industries->pluck('id')->toArray())? 'checked': '' }}>
+            {{ in_array($industry->id, $registered_industries) ? 'checked' : '' }}>
           <label for="industry-{{ $industry->id }}">{{ $industry->name }}</label>
         @endforeach
 

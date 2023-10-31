@@ -13,7 +13,7 @@ class OfferController extends Controller
 
     public function index()
     {
-        $offers = Offer::where('company_id', Auth::guard('company')->user()->id)->paginate(10);
+        $offers = Offer::where('company_id', Auth::guard('company')->user()->company->id)->paginate(10);
 
         return view('company.offer.index', compact('offers'));
     }
@@ -39,7 +39,7 @@ class OfferController extends Controller
         $offer->description = $request->description;
         $offer->requirements = $request->requirements;
         $offer->benefits = $request->benefits;
-        $offer->company_id = Auth::guard('company')->user()->id;
+        $offer->company_id = Auth::guard('company')->user()->company->id;
         $offer->save();
         $offer->features()->sync($request->input('feature'));
 
@@ -48,7 +48,7 @@ class OfferController extends Controller
 
     public function show(Offer $offer)
     {
-        $this->authorize('viewAny', $offer);
+        // $this->authorize('viewAny', $offer);
 
         $offer->load('features');
 
@@ -66,7 +66,7 @@ class OfferController extends Controller
 
     public function update(Request $request, Offer $offer)
     {
-        $this->authorize('viewAny', $offer);
+        // $this->authorize('viewAny', $offer);
 
         $request->validate([
             'name' => 'required',
@@ -88,7 +88,7 @@ class OfferController extends Controller
 
     public function destroy(Offer $offer)
     {
-        $this->authorize('viewAny', $offer);
+        // $this->authorize('viewAny', $offer);
 
         $offer->delete();
         return redirect()->route('company.offer.index')->with('success', '求人を削除しました。');

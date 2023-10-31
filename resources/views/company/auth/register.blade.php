@@ -2,6 +2,13 @@
   <h1>Company登録</h1>
   <form method="POST" action="{{ route('company.register') }}">
     @csrf
+    {{-- 会社名 --}}
+    <div>
+      <x-input-label for="companyName" :value="__('companyName')" />
+      <x-text-input id="companyName" class="block mt-1 w-full" type="text" name="companyName" :value="old('companyName')" required
+        autofocus autocomplete="companyName" />
+      <x-input-error :messages="$errors->get('companyName')" class="mt-2" />
+    </div>
 
     <!-- Name -->
     <div>
